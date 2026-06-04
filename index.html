@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保險業務員品牌課 · 公勝北三 + 同體系業務員</title>
+<style>
+  :root{
+    --ink:#201f1d; --muted:#6e675f; --line:#ded7cf; --paper:#fbfaf7;
+    --soft:#f1ede7; --accent:#a5483d; --accent-2:#2f6f73;
+    --good:#1f7a5a; --warn:#a35f16; --risk:#9b3030;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; background:#e9e4dc; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.72; font-size:16px;
+    display:flex; align-items:center; justify-content:center; padding:30px 16px;
+  }
+  .container{ max-width:760px; width:100%; }
+  .hero{
+    background:var(--paper); border:1px solid var(--line); padding:36px 36px;
+    box-shadow:0 12px 40px rgba(47,42,36,.08);
+  }
+  .eyebrow{
+    display:inline-flex; padding:5px 11px; background:#eee2dc; color:var(--accent);
+    font-size:12.5px; font-weight:800; letter-spacing:.04em; margin-bottom:14px;
+  }
+  h1{ margin:0 0 8px; font-size:clamp(26px,4vw,38px); line-height:1.15; }
+  .lead{ color:#3d3934; font-size:16.5px; margin:0 0 6px; }
+  .small{ color:var(--muted); font-size:13px; }
+  .lessons{ display:grid; gap:14px; margin-top:26px; }
+  .card{
+    display:block; background:#fff; border:1px solid var(--line); padding:20px 22px;
+    text-decoration:none; color:inherit; transition:.15s; position:relative;
+  }
+  .card:hover{ border-color:var(--accent); box-shadow:0 4px 14px rgba(165,72,61,.12); }
+  .card.disabled{ opacity:.55; cursor:not-allowed; background:#f6f3ed; }
+  .card.disabled:hover{ border-color:var(--line); box-shadow:none; }
+  .card .num{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; color:var(--accent); letter-spacing:.1em; font-weight:800; }
+  .card h3{ margin:6px 0 4px; font-size:19px; }
+  .card .sub{ color:#5f574f; font-size:14px; margin-bottom:8px; }
+  .card .meta{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .tag{ display:inline-flex; padding:3px 9px; background:var(--soft); border:1px solid var(--line); color:#514b45; font-size:11.5px; font-weight:700; }
+  .tag.live{ background:#e9f4ed; border-color:#bfe0cc; color:var(--good); }
+  .tag.soon{ background:#fff4e7; border-color:#e5d5a3; color:var(--warn); }
+  .footer{ margin-top:24px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <span class="eyebrow">公勝北三 + 同體系業務員 · 內訓 2026 夏</span>
+    <h1>保險業務員品牌課</h1>
+    <p class="lead">透過網路打造個人品牌影響力 · 三堂 × 2 小時 · 講師：魏上騰</p>
+    <p class="small">L1 我是誰 · L2 我長什麼樣 · L3 名單怎麼來</p>
+
+    <div class="lessons">
+      <a class="card" href="lesson1.html">
+        <div class="num">LESSON 01 · 6/4</div>
+        <h3>我是誰 — 品牌定位 + 人格輪廓</h3>
+        <div class="sub">回家作業：五步驟 AI 協作練習</div>
+        <div class="meta">
+          <span class="tag live">作業上線</span>
+          <span class="tag">繳交期限 7/2</span>
+          <span class="tag">預估 40-60 分鐘</span>
+        </div>
+      </a>
+
+      <a class="card disabled">
+        <div class="num">LESSON 02 · 7/2</div>
+        <h3>我長什麼樣 — 內容輸出 + 法規邊界</h3>
+        <div class="sub">內容輸出 / 三大貼文地雷 / 2025 新平台 / AI 寫文工作流</div>
+        <div class="meta">
+          <span class="tag soon">即將推出</span>
+        </div>
+      </a>
+
+      <a class="card disabled">
+        <div class="num">LESSON 03 · 7/9</div>
+        <h3>名單怎麼來 — 轉換 + 轉介紹</h3>
+        <div class="sub">表單篩選 / 邀約 SOP / FB & IG 演算法 2025 / 客戶經營</div>
+        <div class="meta">
+          <span class="tag soon">即將推出</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">
+      最後更新 2026-06-04 · LINE-1 短影音行銷公司 × 公勝北三<br>
+      講義 / 投影片 / 課後資源都在這裡，每堂課後會更新。
+    </div>
+  </div>
+</div>
+</body>
+</html>
