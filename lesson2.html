@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L2 保險業務員品牌課 · 教材完整版</title>
+<style>
+  :root {
+    --primary: #0A2540;
+    --accent: #635BFF;
+    --text: #1A1F36;
+    --text-2: #4F566B;
+    --text-3: #8792A2;
+    --border: #E3E8EE;
+    --bg-subtle: #F6F9FC;
+    --bg-highlight: #F1F5FF;
+    --warn-bg: #FFF7ED;
+    --warn-border: #FDB863;
+    --warn-text: #92400E;
+    --danger-bg: #FEF2F2;
+    --danger-border: #FCA5A5;
+    --danger-text: #991B1B;
+    --success-bg: #F0FDF4;
+    --success-border: #86EFAC;
+    --success-text: #14532D;
+    --code-bg: #0A2540;
+    --code-text: #E3E8EE;
+    --code-comment: #8792A2;
+    --code-keyword: #A78BFA;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background: white;
+    line-height: 1.75;
+    font-size: 17px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tab Nav */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(10, 37, 64, 0.04);
+  }
+  .tab-nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .tab-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .tab-brand strong {
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .tab-buttons {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .tab-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .tab-button:hover {
+    background: var(--bg-subtle);
+    color: var(--primary);
+  }
+  .tab-button.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+  }
+  .tab-button.active .tab-num {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  .tab-num {
+    display: inline-block;
+    background: var(--bg-highlight);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 48px 96px;
+  }
+
+  /* Tab content */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Header */
+  .header {
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  .header .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: var(--primary);
+    line-height: 1.25;
+  }
+  .subtitle {
+    font-size: 17px;
+    color: var(--text-2);
+    margin: 0;
+  }
+  h2 {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 56px 0 20px;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  h2 .num {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  h2 .step {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    background: var(--accent);
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+  }
+  h3 {
+    font-size: 19px;
+    font-weight: 600;
+    margin: 32px 0 6px;
+    color: var(--primary);
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-2);
+    margin: 20px 0 10px;
+    letter-spacing: 0.02em;
+  }
+  p { margin: 0 0 14px 0; }
+
+  /* Intro */
+  .intro {
+    background: var(--bg-highlight);
+    border-left: 4px solid var(--accent);
+    padding: 22px 28px;
+    margin: 24px 0 40px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--text-2);
+    line-height: 1.75;
+  }
+  .intro strong { color: var(--primary); }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 40px;
+    font-size: 14.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  thead th {
+    background: var(--primary);
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+  }
+  tbody td {
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) { background: var(--bg-subtle); }
+
+  /* Card (Toolkit) */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+  }
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+  .card-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    font-feature-settings: "tnum";
+  }
+  .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .card-subtitle {
+    color: var(--text-3);
+    font-size: 14px;
+    margin-left: auto;
+    font-weight: 500;
+  }
+
+  /* Example */
+  .example {
+    background: var(--bg-subtle);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 12px 0 20px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    border-left: 3px solid var(--text-3);
+  }
+  .example-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* Warnings */
+  .warn {
+    background: var(--warn-bg);
+    border-left: 4px solid var(--warn-border);
+    padding: 16px 22px;
+    margin: 18px 0;
+    border-radius: 4px;
+    color: var(--warn-text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .warn strong { color: var(--warn-text); }
+  .danger {
+    background: var(--danger-bg);
+    border-left: 4px solid var(--danger-border);
+    padding: 22px 28px;
+    margin: 20px 0;
+    border-radius: 4px;
+    color: var(--danger-text);
+  }
+  .danger ol { margin: 8px 0 0 0; padding-left: 22px; }
+  .danger li { margin: 6px 0; font-size: 16px; }
+  .success {
+    background: var(--success-bg);
+    border-left: 4px solid var(--success-border);
+    padding: 22px 28px;
+    margin: 20px 0;
+    border-radius: 4px;
+    color: var(--success-text);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* Bible Fields */
+  .field {
+    margin: 24px 0;
+    padding: 24px 28px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .field-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .field-hint {
+    color: var(--text-3);
+    font-size: 14.5px;
+    margin-bottom: 14px;
+  }
+  .fill-in {
+    border: 2px dashed var(--border);
+    background: #FAFBFC;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 72px;
+    color: var(--text-3);
+    font-size: 15px;
+    font-style: italic;
+  }
+  .example-box {
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-subtle);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-2);
+  }
+  .example-box strong { color: var(--primary); }
+  .full-example {
+    background: var(--primary);
+    color: white;
+    padding: 32px 36px;
+    border-radius: 12px;
+    margin: 24px 0;
+    font-size: 15.5px;
+    line-height: 1.85;
+  }
+  .full-example h3 {
+    color: white;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .full-example .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .full-example .row:last-child { border-bottom: none; }
+  .full-example .row-label {
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .full-example .row-content { color: white; }
+  .tips {
+    background: var(--bg-subtle);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .tips h4 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 15px;
+  }
+  .tips ul { margin: 0; padding-left: 20px; }
+  .tips li { margin: 8px 0; line-height: 1.7; }
+
+  /* Prompt blocks */
+  .prompt-hint {
+    color: var(--text-2);
+    font-size: 15.5px;
+    margin: 0 0 20px;
+  }
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 32px 0 48px;
+    padding: 24px;
+    background: var(--bg-subtle);
+    border-radius: 10px;
+  }
+  .flow-step {
+    text-align: center;
+    padding: 16px 8px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .flow-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .flow-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .prompt-block {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 28px 32px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 14.5px;
+    line-height: 1.85;
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Monaco, "Courier New", monospace;
+    white-space: pre-wrap;
+    margin: 16px 0 8px;
+    border: 1px solid #1F3A5F;
+  }
+  .placeholder {
+    color: var(--code-keyword);
+    background: rgba(167, 139, 250, 0.15);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .use-note {
+    background: var(--bg-subtle);
+    border-left: 3px solid var(--text-3);
+    padding: 14px 20px;
+    margin: 16px 0 24px;
+    border-radius: 4px;
+    font-size: 14.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+  .use-note strong { color: var(--primary); }
+  .final {
+    background: linear-gradient(135deg, var(--primary) 0%, #1E3A5F 100%);
+    color: white;
+    padding: 36px 40px;
+    border-radius: 12px;
+    margin: 48px 0 0;
+  }
+  .final h3 {
+    color: white;
+    margin: 0 0 16px;
+    font-size: 20px;
+  }
+  .final ol { margin: 0; padding-left: 22px; }
+  .final li { margin: 10px 0; line-height: 1.7; }
+  .final strong { color: #C4B5FD; }
+
+  /* Archetype (Calendar) */
+  .archetype {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+  }
+  .archetype-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+  }
+  .arche-num {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    font-feature-settings: "tnum";
+  }
+  .arche-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .arche-slogan {
+    color: var(--text-2);
+    font-size: 15px;
+    margin-left: auto;
+    font-style: italic;
+  }
+  .arche-platform {
+    display: inline-block;
+    background: var(--bg-highlight);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .weekly {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .day {
+    background: var(--bg-subtle);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .day-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .day-theme {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.4;
+  }
+  .titles { margin: 20px 0; }
+  .titles-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .title-item {
+    background: var(--bg-subtle);
+    border-left: 3px solid var(--text-3);
+    padding: 12px 18px;
+    margin: 8px 0;
+    border-radius: 4px;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* Common */
+  ul, ol { padding-left: 22px; margin: 12px 0; }
+  li { margin: 6px 0; line-height: 1.7; }
+  strong { color: var(--primary); font-weight: 600; }
+  .footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    color: var(--text-3);
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* Print - 印刷時全部展開 */
+  @media print {
+    .tab-nav { display: none; }
+    .tab-content {
+      display: block !important;
+      page-break-before: always;
+    }
+    .tab-content:first-of-type { page-break-before: auto; }
+    body { padding: 0; font-size: 13px; }
+    .container { padding: 20px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 19px; }
+    .card, .archetype, .field, .prompt-block, .full-example, .final { page-break-inside: avoid; }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .tab-nav-inner { padding: 12px 20px; }
+    .container { padding: 32px 20px 80px; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 21px; }
+    .flow { grid-template-columns: repeat(2, 1fr); }
+    .full-example .row { grid-template-columns: 1fr; gap: 4px; }
+    .full-example .row-label { font-size: 12px; }
+    .weekly { grid-template-columns: 1fr; }
+    .tab-brand { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <div class="tab-brand">L2 · <strong>保險業務員品牌課</strong></div>
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="calendar">
+        <span class="tab-num">M3</span>
+        <span>六原型行事曆</span>
+      </button>
+      <button class="tab-button" data-tab="toolkit">
+        <span class="tab-num">M4</span>
+        <span>貼文類型工具箱</span>
+      </button>
+      <button class="tab-button" data-tab="bible">
+        <span class="tab-num">M5·1</span>
+        <span>業務員 Bible</span>
+      </button>
+      <button class="tab-button" data-tab="prompt">
+        <span class="tab-num">M5</span>
+        <span>AI Prompt 模板卡</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<!-- ================================================== -->
+<!-- TAB 1: 六原型內容行事曆 -->
+<!-- ================================================== -->
+<section class="tab-content active" id="calendar">
+
+<header class="header">
+  <div class="label">Lesson 2 · 模組 3 講義</div>
+  <h1>六原型內容行事曆</h1>
+  <p class="subtitle">每個原型每週三篇的內容策略 · 主戰平台 · 危險動作</p>
+</header>
+
+<div class="intro">
+  <strong>怎麼用這份表</strong>：這不是要你死板照做。是給你<strong>回家後每天早上 15 分鐘要幹嘛</strong>的答案。找出你的原型,對照週一 / 週三 / 週五要 PO 什麼主題,再用 AI Prompt 模板卡去產出。<strong>先練熟一個原型的節奏,再考慮混搭其他原型。</strong>
+</div>
+
+<h2>六原型速查表</h2>
+
+<table>
+<thead>
+<tr>
+<th style="width:11%">原型</th>
+<th style="width:14%">週一</th>
+<th style="width:14%">週三</th>
+<th style="width:14%">週五</th>
+<th style="width:22%">主戰平台</th>
+<th style="width:25%">危險動作</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>知識</strong></td><td>條款拆解</td><td>產品對比</td><td>迷思破除</td><td>FB 長文 / 部落格</td><td>寫勵志雞湯</td></tr>
+<tr><td><strong>權力</strong></td><td>二選一決策</td><td>時間成本對比</td><td>絕對觀點</td><td>LinkedIn(領英) / FB</td><td>「都可以喔」</td></tr>
+<tr><td><strong>信念</strong></td><td>價值觀宣言</td><td>使命故事</td><td>行業批判</td><td>FB / YouTube</td><td>中性兩邊都對</td></tr>
+<tr><td><strong>玩樂</strong></td><td>迷因梗圖</td><td>生活化類比</td><td>短影音教學</td><td>IG Reels / Threads / TikTok</td><td>寫長篇乾貨</td></tr>
+<tr><td><strong>關懷</strong></td><td>客戶故事</td><td>節氣關心</td><td>家庭知識</td><td>FB / IG / LINE 1v1</td><td>硬條款分析</td></tr>
+<tr><td><strong>務實</strong></td><td>數字對比表</td><td>保單健檢</td><td>CP 值分析</td><td>FB / 部落格</td><td>情感勵志文</td></tr>
+</tbody>
+</table>
+
+<h2>各原型每週節奏</h2>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">01</div>
+    <div class="arche-title">知識型</div>
+    <div class="arche-slogan">「事實與知識讓你自由」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜FB 長文 · 部落格</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">條款拆解</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">產品對比</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">迷思破除</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「90% 的人都不知道,這 3 種保單會被列入遺產稅」</div>
+    <div class="title-item">「同樣保額,A 公司比 B 公司多賠 XX 萬,差別在哪?」</div>
+    <div class="title-item">「你的醫療險條款裡這 4 個字,可能讓你少賠 50 萬」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：寫勵志雞湯 → 掉粉最快。你的粉絲是來「補知識」不是「補情緒」。<br>
+    <strong>修法</strong>：想寫感性文時,改成「知識故事」— 用一個案例包裝一個條款。
+  </div>
+</div>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">02</div>
+    <div class="arche-title">權力型</div>
+    <div class="arche-slogan">「權力讓人充滿魅力」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜LinkedIn 領英 · FB</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">二選一決策</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">時間成本對比</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">絕對觀點</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「老闆,這 3 種狀況的人,買投資型保單就是浪費」</div>
+    <div class="title-item">「給你 3 個問題,30 秒判斷你該不該補這張保單」</div>
+    <div class="title-item">「年薪 300 萬以上的人,今年只該做這 1 件保險決定」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：寫「都可以喔」「你自己想」這種模糊話 → 信任流失。權力型讀者要「肯定的答案」。<br>
+    <strong>修法</strong>：不確定時改「不建議 XX」也比「都可以」好。
+  </div>
+</div>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">03</div>
+    <div class="arche-title">信念型</div>
+    <div class="arche-slogan">「堅守信念才能創造榮耀」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜FB · YouTube</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">價值觀宣言</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">使命故事</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">行業批判 · 倡議</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「做了 10 年保險,我最後悔的是這件事……」</div>
+    <div class="title-item">「為什麼我從來不主動推這張保單,就算 FYC 很高」</div>
+    <div class="title-item">「我希望 5 年後保險業可以變成這樣 — 寫給每個還在猶豫的人」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：中性兩邊都對 → 失去號召力。信念型最強的是「相信」,沒有立場 = 鐵粉變路人。<br>
+    <strong>修法</strong>：每篇貼文寫完後自問「我在反對什麼?」找不到反對面 = 這篇沒立場。
+  </div>
+</div>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">04</div>
+    <div class="arche-title">玩樂型</div>
+    <div class="arche-slogan">「人生苦短,及時行樂」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜IG Reels · Threads · TikTok</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">迷因梗圖</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">生活化類比</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">短影音教學</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「身為保險業務員,最害怕被問的 3 個問題(最後一個太狠)」</div>
+    <div class="title-item">「如果保險公司是大學科系……你買的是哪一個?」</div>
+    <div class="title-item">「我用《魷魚遊戲》解釋為什麼你需要醫療險」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：寫長篇乾貨知識文 → 顯得不自在,粉絲掉特別快。<br>
+    <strong>修法</strong>：想寫乾貨時,改成「乾貨 + 迷因結尾」— 條款講完最後放一張搞笑截圖。
+  </div>
+</div>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">05</div>
+    <div class="arche-title">關懷型</div>
+    <div class="arche-slogan">「愛你如同愛自己」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜FB · IG · LINE 1v1</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">客戶故事</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">節氣關心</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">家庭知識</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「我陪一個媽媽走過小孩確診的 6 個月,她跟我說的最後一句話是……」</div>
+    <div class="title-item">「給新手爸媽的 5 件事,第 3 件比買保險更重要」</div>
+    <div class="title-item">「為什麼我不會在客戶生日推保單?因為這天我只想說『生日快樂』」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：寫硬條款分析或數字導向文 → 溫度會冷掉。<br>
+    <strong>修法</strong>：想講條款時,把條款包在客戶故事裡。乾貨要有溫度。
+  </div>
+</div>
+
+<div class="archetype">
+  <div class="archetype-head">
+    <div class="arche-num">06</div>
+    <div class="arche-title">務實型</div>
+    <div class="arche-slogan">「追逐更好,付出更少」</div>
+  </div>
+  <div class="arche-platform">主戰平台｜FB · 部落格 · 表格內容</div>
+  <div class="weekly">
+    <div class="day"><div class="day-label">Mon</div><div class="day-theme">數字對比表</div></div>
+    <div class="day"><div class="day-label">Wed</div><div class="day-theme">保單健檢</div></div>
+    <div class="day"><div class="day-label">Fri</div><div class="day-theme">CP 值分析</div></div>
+  </div>
+  <div class="titles">
+    <div class="titles-label">貼文標題範例</div>
+    <div class="title-item">「同樣 200 萬醫療保障,A 方案比 B 方案省 18,000 元 / 年,差在哪?」</div>
+    <div class="title-item">「30 歲、50 歲、70 歲,預算 30K 該怎麼配保單最有效?」</div>
+    <div class="title-item">「我幫一個 35 歲爸爸刪掉 3 張保單後,每年省 4 萬還增加 200 萬保障」</div>
+  </div>
+  <div class="warn">
+    <strong>危險動作</strong>：寫情感故事或勵志文 → 讀者會覺得「你在賣話術」。<br>
+    <strong>修法</strong>：每篇貼文都要有<strong>至少 1 個具體數字</strong>,數字 = 你的信任貨幣。
+  </div>
+</div>
+
+<h2>三個實用提示</h2>
+
+<div class="intro" style="margin-bottom:20px">
+  <strong>1. 先練熟主原型,再混搭</strong><br>
+  你 L1 找到 2-3 個原型,但一開始建議只練「公眾我」那個主軸。每天 PO 熟練後,再加入認知我(第二原型)當變化,避免混亂。
+</div>
+
+<div class="intro" style="margin-bottom:20px">
+  <strong>2. 一週 3 篇不是絕對值</strong><br>
+  這是最舒服的節奏 — 讓演算法認得你,又不會爆肝。如果你能持續一週 5 篇,更好;但一週 3 篇是「不會放棄」的最低配。
+</div>
+
+<div class="intro">
+  <strong>3. 平台選擇比頻率更重要</strong><br>
+  在錯的平台一週 5 篇 = 白做。找對平台一週 2 篇也會贏。看你的原型主戰是哪個,先攻那個。<strong>其他平台等你在主戰站穩再說。</strong>
+</div>
+
+</section>
+
+<!-- ================================================== -->
+<!-- TAB 2: 貼文類型工具箱 -->
+<!-- ================================================== -->
+<section class="tab-content" id="toolkit">
+
+<header class="header">
+  <div class="label">Lesson 2 · 模組 4 講義</div>
+  <h1>貼文類型工具箱</h1>
+  <p class="subtitle">六大類型 × 保險業範例 × 法規紅線</p>
+</header>
+
+<div class="intro">
+  <strong>怎麼用這份工具</strong>：原型是你的<strong>口氣</strong>,類型是你的<strong>招式</strong>。同一個客戶洞察可以用不同類型出手 — 有時候引討論、有時候引共鳴、有時候教乾貨。這份工具給你 6 種招式的操作說明。你不用全會,先挑跟你原型 fit 的 2-3 種練熟就夠。
+</div>
+
+<h2>六大類型速查表</h2>
+
+<table>
+<thead>
+<tr>
+<th style="width:15%">類型</th>
+<th style="width:28%">定義</th>
+<th style="width:20%">優點</th>
+<th style="width:20%">缺點</th>
+<th style="width:17%">適合原型</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>1. 共鳴型</strong></td><td>說出大家不敢講、但人人都有的情緒</td><td>極高共鳴<br>建立信任</td><td>過度暴露會失專業感</td><td>關懷 / 信念</td></tr>
+<tr><td><strong>2. 觀點型</strong><br><span style="color:#8792A2;font-size:13px">Hot Take</span></td><td>少數派或反常識觀點,有理據</td><td>引發討論<br>思想領袖</td><td>容易踩線惹爭議</td><td>知識 / 信念 / 權力</td></tr>
+<tr><td><strong>3. 提問型</strong></td><td>一個好問題誘發分享</td><td>極高留言<br>挖客戶痛點</td><td>無法直接傳專業</td><td>任何原型</td></tr>
+<tr><td><strong>4. 迷因型</strong></td><td>日常吐槽 / 反差感 + 集體共鳴</td><td>高互動<br>降距離感</td><td>過度可能顯不專業</td><td>玩樂 / 反叛</td></tr>
+<tr><td><strong>5. 懺悔型</strong></td><td>坦白失敗、犯錯、掙扎</td><td>建立真實信任</td><td>分寸難拿</td><td>信念 / 關懷</td></tr>
+<tr><td><strong>6. 教育型</strong></td><td>條款拆解、數字對比、實用知識</td><td>建立專業權威<br>易被收藏</td><td>互動率相對低</td><td>知識 / 務實</td></tr>
+</tbody>
+</table>
+
+<h2>各類型詳細操作</h2>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">01</div>
+    <div class="card-title">共鳴型</div>
+    <div class="card-subtitle">適合原型｜關懷 / 信念</div>
+  </div>
+  <p><strong>定義</strong>：說出大家不敢講、但人人都有的情緒,讓讀者感覺「這就是我」。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Threads 短句</span>
+    「我曾經也認為『這種事不會發生在我身上』,直到朋友突然住院,我才明白為什麼保險對我爸媽那麼重要。」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    我表妹是急診室護理師,兩個小孩。<br><br>
+    上禮拜她跟我說：<br>
+    「我半夜下班回家,看到老公跟小孩睡得好沉,我居然羨慕他們。」<br>
+    「他們有人照顧。」<br>
+    「我呢?」<br><br>
+    ——<br><br>
+    我做這行 8 年,看過太多媽媽把保費省下來給家人買,自己反而是最後一個有保障的人。<br>
+    不是她們不重視,是她們一直習慣「先照顧別人」。<br><br>
+    但我想跟每一個正在硬撐的妳說 —<br>
+    妳願意為家人撐住,是因為妳很愛他們。<br>
+    但下一個被妳愛的人,該是妳自己。
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：極高共鳴、易建立信任、激發轉發</li>
+    <li><strong>缺點</strong>：過度暴露會失專業感,負面故事要有正向轉折</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：不能暗示「買保險 = 一定有幸福結局」；故事涉及具體理賠案例要隱私保護,不點名。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">02</div>
+    <div class="card-title">觀點型（Hot Take）</div>
+    <div class="card-subtitle">適合原型｜知識 / 信念 / 權力</div>
+  </div>
+  <p><strong>定義</strong>：用略為爭議或少數派的觀點切入,引發討論與轉發 — 但要有理有據。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Threads 短句</span>
+    「多數人覺得年輕買保險是浪費,但其實 30 歲前投保,保費便宜 40% — 這才是真正的理財聰明法。」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    很多人覺得 30 歲買保險是浪費 — 沒生病、沒家累、賺的錢還不夠花。<br><br>
+    但我幫過 200+ 位客戶算過：<br>
+    20-30 歲投保跟 40 歲後投保,保費差 60% 以上。<br>
+    更關鍵的是體況 — 30 歲你想怎麼投保都可以,40 歲後被拒保、加費、除外的機率暴增。<br><br>
+    「年輕不需要保險」是最貴的迷思。<br>
+    它讓你錯過的不是保單,是這輩子被動就能拿到的「健康談判籌碼」。<br><br>
+    你 30 歲之前買了什麼?
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：引發廣泛討論和分享、建立思想領袖形象、高留言互動率</li>
+    <li><strong>缺點</strong>：容易踩線或惹爭議,觀點不當會損害品牌信譽</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：禁止誇大保險效益或報酬率、不能暗示特定產品「一定賺」或「穩賺」、不使用未經查證的統計數據。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">03</div>
+    <div class="card-title">提問型</div>
+    <div class="card-subtitle">適合原型｜任何原型</div>
+  </div>
+  <p><strong>定義</strong>：全文幾乎只有一個好問題,誘發大家分享經驗與觀點,提升留言量。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Threads 短句</span>
+    「你現在最擔心的財務風險是什麼?不用是保險,隨便講都可以。留言告訴我。」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    上禮拜跟一位客戶聊天,他說了句話讓我想很久。<br><br>
+    他說：<br>
+    「我不怕現在的窮,我怕的是老了才發現我一直算錯了。」<br><br>
+    那一刻我在想,大家最擔心的其實不是保險,是<strong>不確定感</strong> —<br>
+    不知道自己算對沒有、不知道有沒有漏、不知道會不會太晚。<br><br>
+    ——<br><br>
+    想問問你 —<br>
+    如果現在讓你選一個「最想弄清楚」的財務問題,你會選哪一個?<br>
+    要不要買房、退休金夠不夠、保單有沒有漏,任何都可以。<br><br>
+    留言告訴我。看看大家的答案。
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：極高留言數和討論度、直接了解客戶需求痛點、易引發自然對話</li>
+    <li><strong>缺點</strong>：無法直接傳達專業訊息、需要後續追蹤互動</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：避免詢問個人敏感財務資訊後直接推銷、不暗示特定產品能解決所有風險。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">04</div>
+    <div class="card-title">迷因型</div>
+    <div class="card-subtitle">適合原型｜玩樂 / 反叛</div>
+  </div>
+  <p><strong>定義</strong>：以超日常、超中肯的吐槽或迷因文字搭配圖像,引發「這就是我」的集體共鳴。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Threads 短句</span>
+    「剛簽完保單的客戶：終於解脫,我再也不用想保險的事了。<br>三個月後：欸等等,這個項目是不是…」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    保險業務員的日常靈魂三問：<br><br>
+    早上 9 點：<br>
+    「這客戶回訊息了嗎?」<br><br>
+    下午 3 點：<br>
+    「他剛剛已讀但沒回,是不是不想理我?」<br><br>
+    晚上 10 點：<br>
+    「……我是不是應該再傳一次?」<br><br>
+    三分鐘後 —<br>
+    客戶：「抱歉,剛剛在忙,我在看你上次傳的資料」<br><br>
+    ——<br><br>
+    我們業務不是玻璃心。<br>
+    我們只是每一句「在忙」都會腦補成連續劇。<br><br>
+    懂的都懂。
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：容易獲得高互動率、建立人性化品牌、降低專業距離感</li>
+    <li><strong>缺點</strong>：過度吐槽可能顯得不專業、容易被誤解為不認真對待工作</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：避免暗示保單條款模糊不清或誤導、須確保所有資訊準確。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">05</div>
+    <div class="card-title">懺悔型</div>
+    <div class="card-subtitle">適合原型｜信念 / 關懷</div>
+  </div>
+  <p><strong>定義</strong>：坦白分享幕後失敗、犯錯或真實掙扎,以脆弱感換取信任與共鳴。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Facebook 短句</span>
+    「剛入行時,我勸客戶買保險純粹為了衝業績。後來遇到一位客戶因為聽我建議買了重疾險,真的賠到了。那一刻我才懂什麼叫『責任』。」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    剛入行第 2 年,有位客戶跟我說：<br>
+    「我覺得我不需要,你可以不用再跟我聊了。」<br><br>
+    那時候我很挫敗,還跟同事抱怨「這種人不懂保險」。<br><br>
+    三年後我在便利商店遇到她。<br>
+    她說她媽媽住院,家裡不夠錢,她賣掉了車子。<br>
+    她說：「那時候你要是把利弊講清楚,不要一直催我簽,我可能會聽。」<br><br>
+    那句話我記了 5 年。<br><br>
+    ——<br><br>
+    現在我碰到「不需要」的客戶,不會急著說服。<br>
+    我只問一句：<br>
+    「你不需要,還是還沒有理由需要?」<br><br>
+    差 3 個字,差一輩子。
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：建立真實、可信的形象、高互動和分享率、客戶更願意信任</li>
+    <li><strong>缺點</strong>：須掌握分享分寸、負面故事處理不當會降低專業度</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：禁止涉及具體理賠金額(除非經授權)、不得編造假故事、不能影射其他業務員或保險公司不專業。
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-number">06</div>
+    <div class="card-title">教育型（乾貨）</div>
+    <div class="card-subtitle">適合原型｜知識 / 務實</div>
+  </div>
+  <p><strong>定義</strong>：以條款拆解、數字對比、實用知識建立專業權威,讓讀者「學到東西」。</p>
+  <h4>保險業範例</h4>
+  <div class="example">
+    <span class="example-label">短版 · Facebook 短句</span>
+    「你的醫療險條款裡這 4 個字,可能讓你少賠 50 萬。<br>今天帶你看懂 —」
+  </div>
+  <div class="example">
+    <span class="example-label">長版 · 150-200 字完整貼文</span>
+    你的醫療險條款裡有 4 個字「必要且合理」,90% 的人沒注意到。<br><br>
+    同樣一台自費刀器材,A 醫院申報 20 萬、B 醫院申報 35 萬,保險公司可能只賠 A 醫院的金額 — 因為 B 醫院被認定「不合理」。<br><br>
+    實務上這條讓很多客戶少領了 30-50 萬。<br><br>
+    ——<br><br>
+    3 個自保方法：<br>
+    1. 手術前先問醫師「同款替代品的市價區間」<br>
+    2. 拿到收據當下就拍照,別等出院才整理<br>
+    3. 申請理賠時附上「市場行情說明」(可用醫院公開衛教)<br><br>
+    保單不是買了就沒事。<br>
+    知道怎麼用,才是它的價值。
+  </div>
+  <h4>優缺點</h4>
+  <ul>
+    <li><strong>優點</strong>：建立專業權威、易被收藏、長尾流量高</li>
+    <li><strong>缺點</strong>：互動率相對低、容易顯得枯燥,需靠標題勾人</li>
+  </ul>
+  <div class="warn">
+    <strong>法規紅線</strong>：不能 PO 商品名稱、不能足以辨識特定保險商品、不變造資料。
+  </div>
+</div>
+
+<h2>共同紅線 · 保險業招攬廣告四不</h2>
+
+<div class="danger">
+  <strong style="color:#991B1B">不管用哪種類型,這 4 條都不能踩</strong>
+  <ol>
+    <li>不能 PO 商品名稱及特色</li>
+    <li>不能足以辨識為某特定保險商品</li>
+    <li>不能變造資料</li>
+    <li>不能利用停售效應</li>
+  </ol>
+</div>
+
+<div class="success">
+  <strong>可以做的事</strong><br>
+  · PO 保險「觀念」<br>
+  · PO 客戶「故事」(細節模糊、不點名)<br>
+  · PO 你的「業務員反思」<br>
+  · PO 風險「數據」(要有合法出處)<br>
+  · 利用停售「反向勸導」— 告訴客戶保單健檢的重要性
+</div>
+
+</section>
+
+<!-- ================================================== -->
+<!-- TAB 3: 業務員 Bible 填寫表 -->
+<!-- ================================================== -->
+<section class="tab-content" id="bible">
+
+<header class="header">
+  <div class="label">Lesson 2 · 模組 5 · Step 1 講義</div>
+  <h1>業務員 Bible 填寫表</h1>
+  <p class="subtitle">原型 + 個人指紋 + 客群代表 = 別人抄不來的 AI 記憶檔案</p>
+</header>
+
+<div class="intro">
+  <strong>為什麼 Bible 要細成 12 欄</strong>：如果 100 個業務員都用「原型 + 主題 + 客群」,AI 產出來的貼文會 60% 相似。差異化的來源在<strong>個人指紋</strong>(你的轉捩點、語言、品味)+ <strong>客群代表</strong>(一個具體的人,不是一群人)。填得越細,別人越抄不來你的內容。<br><br>
+  <strong>怎麼用</strong>：把下面 12 個欄位填完,存到你的 Claude 或 ChatGPT。以後每次要 AI 幫你產貼文,都先貼這份 Bible。
+</div>
+
+<h2><span class="num">Part A</span>你的 Profile（4 欄）</h2>
+
+<div class="field">
+  <div class="field-title">1. 原型（L1 找到的 2-3 個）</div>
+  <div class="field-hint">你在 L1 課堂上圈的原型,以及夥伴幫你圈的原型 — 交集就是你的主軸</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    <strong>知識(公眾我,主軸)</strong> + <strong>關懷(認知我,想長成的樣子)</strong>
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">2. 3 個內容主題</div>
+  <div class="field-hint">從六原型內容行事曆挑,對應你的原型 — 這 3 個是你以後每週輪流寫的方向</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    ① 條款拆解(週一) &nbsp;&nbsp; ② 家庭保險故事(週三) &nbsp;&nbsp; ③ 迷思破除(週五)
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">3. 3 個地雷（原型專屬 + 招攬廣告 4 不）</div>
+  <div class="field-hint">你這個原型不能踩的坑 + 保險業共同紅線</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    ① 不寫勵志雞湯(知識型地雷) &nbsp;&nbsp; ② 不 PO 商品名稱 &nbsp;&nbsp; ③ 不利用停售效應
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">4. 我的口頭禪（讓 AI 學你的味道）</div>
+  <div class="field-hint">你平常會說的、有辨識度的短句 — AI 學會後,產出來的內容才像你</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    「老實講」、「我跟你說」、「這件事很多人不知道」
+  </div>
+</div>
+
+<h2><span class="num">Part B</span>個人指紋（4 欄）· 差異化來源</h2>
+
+<div class="intro" style="margin-top:20px">
+  <strong>為什麼這 4 欄是關鍵</strong>：這 4 欄的答案<strong>只有你答得出來</strong>。原型、客群、主題大家都會抄,但你的轉捩點事件、你的語言習慣、你的品味邊界、你的開場場景 — 別人抄不來。<strong>這 4 欄才是你貼文的靈魂。</strong>
+</div>
+
+<div class="field">
+  <div class="field-title">5. 3 個轉捩點事件</div>
+  <div class="field-hint">你人生做過的重大決定或關鍵時刻 — 這些事件會反覆出現在你的貼文裡當錨點</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    ① 25 歲爺爺猝逝,我第一次自己付 20 萬醫藥費<br>
+    ② 30 歲離開科技業轉保險,家人反對半年<br>
+    ③ 5 年前一位護理師客戶因為聽我建議買了重疾險真的賠到,那天我在便利商店哭了 20 分鐘
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">6. 只有我會用的字詞</div>
+  <div class="field-hint">你的語言指紋 — 常用短句、口頭禪、你獨特的用字。AI 用這些字詞,產出來的東西才像你</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    「講白了」、「跟你講喔」、「你自己想想」、「這件事很多人不知道」、「不誇張」
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">7. 絕對不寫清單</div>
+  <div class="field-hint">你的品味邊界 = 你的獨特性。你不寫的東西定義了你</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    不寫小孩(尊重家人隱私) &nbsp;|&nbsp; 不用「拚了！」「加油！」(太業務) &nbsp;|&nbsp; 不寫網路熱門梗(掉價) &nbsp;|&nbsp; 不寫自己收入
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">8. Signature 開場場景</div>
+  <div class="field-hint">你最常用的 3 個「畫面感開場」— AI 產貼文時會從這 3 個切入</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    ① 便利商店(客戶臨時約碰面的地方)<br>
+    ② 客戶生日那天(不推銷的日子)<br>
+    ③ 跟老同事聊到一半突然說(反思瞬間)
+  </div>
+</div>
+
+<h2><span class="num">Part C</span>客群代表人物（4 欄）· 從一群人變成一個人</h2>
+
+<div class="intro" style="margin-top:20px">
+  <strong>為什麼要「一個人」不是「一群人」</strong>：「30-40 歲護理師媽媽」太模糊,AI 產出來是通用的。但如果你告訴 AI 你想觸動的是<strong>「小芸,32 歲急診室護理師,兩個小孩,先生半年前失業」</strong>,AI 產出的貼文就會有溫度。<strong>寫給 1 個人的貼文,永遠比寫給 100 種人更打動人。</strong>
+</div>
+
+<div class="field">
+  <div class="field-title">9. 客群代表人物基本檔案</div>
+  <div class="field-hint">名字(虛擬)、年齡、職業、家庭狀況。可以是真實客戶的化名,或組合 3 位客戶的特徵</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    小芸,32 歲急診室護理師,兩個小孩(5 歲、2 歲),先生半年前失業在家帶小孩,住新北汐止
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">10. 她的一天</div>
+  <div class="field-hint">早 6 點到晚 12 點,她的具體行程。這是右腦養分的最強來源</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    6 點做早餐 → 7 點送小孩 → 8 點交接 → 中午值班室吃冷便當 → 下班已 6 點半 → 接小孩 → 洗澡陪讀睡覺已 10 點 → 剩自己的時間只有 22-24 點
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">11. 她說過最讓你印象深刻的一句話</div>
+  <div class="field-hint">真實的、你當下有情緒反應的話。這句話會反覆出現在你的貼文裡當引子</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    「我半夜下班回家,看到老公跟小孩睡得好沉,我居然羨慕他們 — 他們有人照顧,我呢?」
+  </div>
+</div>
+
+<div class="field">
+  <div class="field-title">12. 她的核心冰山渴望 + 溝通規則</div>
+  <div class="field-hint">她真正想要什麼(不是她說的)+ 溝通她時要注意的禁忌話題和平台偏好</div>
+  <div class="fill-in">在這裡寫……</div>
+  <div class="example-box">
+    <span class="example-label">張業務員範例</span>
+    <strong>渴望</strong>：「我想被照顧一次,可是好像沒人會照顧我」<br>
+    <strong>溝通規則</strong>：LINE 短句晚 10 點後傳最有效 &nbsp;|&nbsp; 不能碰先生的事 &nbsp;|&nbsp; 不能碰別家小孩比較好
+  </div>
+</div>
+
+<h2><span class="num">範例</span>張業務員的完整 Bible（12 欄）</h2>
+
+<div class="full-example">
+  <h3>張業務員 · AI Bible v2</h3>
+  <div class="row"><div class="row-label">A · 原型</div><div class="row-content">知識(主軸) + 關懷(社群刻意展現)</div></div>
+  <div class="row"><div class="row-label">A · 內容主題</div><div class="row-content">條款拆解 / 家庭保險故事 / 迷思破除</div></div>
+  <div class="row"><div class="row-label">A · 地雷</div><div class="row-content">不寫勵志雞湯 / 不 PO 商品名稱 / 不利用停售效應</div></div>
+  <div class="row"><div class="row-label">A · 口頭禪</div><div class="row-content">「老實講」、「我跟你說」、「這件事很多人不知道」</div></div>
+  <div class="row"><div class="row-label">B · 轉捩點</div><div class="row-content">爺爺猝逝付 20 萬醫藥費 / 30 歲轉行 / 護理師客戶真的賠到那天哭了</div></div>
+  <div class="row"><div class="row-label">B · 語言指紋</div><div class="row-content">「講白了」、「跟你講喔」、「你自己想想」、「不誇張」</div></div>
+  <div class="row"><div class="row-label">B · 絕對不寫</div><div class="row-content">不寫小孩 / 不用「拚了！」 / 不寫網路梗 / 不寫收入</div></div>
+  <div class="row"><div class="row-label">B · 開場場景</div><div class="row-content">便利商店 / 客戶生日那天 / 跟老同事聊到一半突然說</div></div>
+  <div class="row"><div class="row-label">C · 代表人物</div><div class="row-content">小芸 · 32 歲急診室護理師 · 兩個小孩 · 先生半年前失業</div></div>
+  <div class="row"><div class="row-label">C · 她的一天</div><div class="row-content">6 點做早餐→送小孩→交接→值班室冷便當→接小孩→10 點才屬於自己</div></div>
+  <div class="row"><div class="row-label">C · 印象深刻的話</div><div class="row-content">「他們有人照顧,我呢?」</div></div>
+  <div class="row"><div class="row-label">C · 渴望+規則</div><div class="row-content">「我想被照顧一次」/ LINE 短句晚 10+ / 不碰先生的事</div></div>
+</div>
+
+<div class="tips">
+  <h4>填寫小提示</h4>
+  <ul>
+    <li>Part A 5 分鐘就能填完,<strong>Part B + Part C 要花 30-60 分鐘,但值得</strong></li>
+    <li>Bible 是活的 — 用一週後你會想改,那就改</li>
+    <li>如果你有<strong>兩個明顯不同的客群</strong>,建<strong>兩份 Bible</strong>(每份都有自己的 Part C)</li>
+    <li>「Part B 個人指紋」寫不出來? 找一個朋友互訪 30 分鐘,他 / 她能幫你看到你自己看不到的獨特性 — 這是 L1 的「盲目我」</li>
+    <li>Part C「客群代表人物」最好用 1 位真實客戶的化名 + 部分細節組合,不要完全虛構</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ================================================== -->
+<!-- TAB 4: AI Prompt 模板卡 -->
+<!-- ================================================== -->
+<section class="tab-content" id="prompt">
+
+<header class="header">
+  <div class="label">Lesson 2 · 模組 5 講義</div>
+  <h1>AI Prompt 模板卡</h1>
+  <p class="subtitle">6 段 Prompt · Bible → 月度日曆 → 每日素材 → 產文 → 自檢 → 首次私訊</p>
+</header>
+
+<div class="intro">
+  <strong>怎麼用這份卡</strong>：這 6 段 Prompt 是你的 AI 工作流。<strong>Prompt 1 只要跑一次</strong>(建 Bible),之後每天用 <strong>Prompt 3 → Prompt 4 → Prompt 5</strong> 產出,PO 出去後用 <strong>Prompt 6</strong> 回覆讀者。<br><br>
+  <strong>差異化關鍵在 Prompt 3</strong>：每天早上花 3 分鐘記錄「今天的新鮮素材」— 新案例、新體悟、當下心情。AI 會把這些融入貼文。<strong>這樣就算 100 個業務員用同一份 Bible,貼文也會 100% 不同。</strong>
+</div>
+
+<div class="flow" style="grid-template-columns: repeat(6, 1fr);">
+  <div class="flow-step"><div class="flow-num">1</div><div class="flow-name">建 Bible</div></div>
+  <div class="flow-step"><div class="flow-num">2</div><div class="flow-name">月度日曆</div></div>
+  <div class="flow-step"><div class="flow-num">3</div><div class="flow-name">每日新鮮<br>素材</div></div>
+  <div class="flow-step"><div class="flow-num">4</div><div class="flow-name">產文<br>+ CTA</div></div>
+  <div class="flow-step"><div class="flow-num">5</div><div class="flow-name">AI 自檢</div></div>
+  <div class="flow-step"><div class="flow-num">6</div><div class="flow-name">首次私訊<br>SOP</div></div>
+</div>
+
+<h2><span class="step">STEP 1</span>建立你的 Bible</h2>
+<p class="prompt-hint">灌入一次,AI 就記得你是誰、你的客戶是誰。以後每個對話開頭都貼上這段。</p>
+
+<div class="prompt-block">你以後幫我寫的所有貼文都要記住這些設定：
+
+【Part A · 業務員 Profile】
+- 原型： <span class="placeholder">[你的原型,例：知識 + 關懷]</span>
+- 3 個內容主題： <span class="placeholder">[主題 1、主題 2、主題 3]</span>
+- 3 個地雷： <span class="placeholder">[不寫勵志文、不 PO 商品名稱、不利用停售效應]</span>
+- 口頭禪： <span class="placeholder">[「老實講」、「我跟你說」]</span>
+
+【Part B · 個人指紋】
+- 3 個轉捩點事件： <span class="placeholder">[你 3 個人生關鍵時刻]</span>
+- 只有我會用的字詞： <span class="placeholder">[「講白了」、「跟你講喔」]</span>
+- 絕對不寫清單： <span class="placeholder">[不寫小孩、不用「拚了！」]</span>
+- Signature 開場場景： <span class="placeholder">[便利商店 / 客戶生日那天 / ...]</span>
+
+【Part C · 客群代表人物】
+- 基本檔案(姓名年齡職業家庭)： <span class="placeholder">[小芸,32 歲護理師...]</span>
+- 她的一天： <span class="placeholder">[早 6 點到晚 12 點的行程]</span>
+- 她說過最印象深刻的話： <span class="placeholder">[真實一句話]</span>
+- 核心渴望+溝通規則： <span class="placeholder">[渴望+禁忌+平台偏好]</span>
+
+以後我丟客戶對話或情境給你,你都要用這個設定產貼文。
+確認收到請回「Bible 已載入」。</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：只跑一次。跑完 AI 會回「Bible 已載入」,之後你在同一個對話裡直接跳到 Prompt 2 → 3 → 4 → 5 → 6。<strong>下次開新對話</strong>,要再貼一次 Bible。
+</div>
+
+<h2><span class="step">STEP 2</span>AI 產月度貼文日曆</h2>
+<p class="prompt-hint">一次排 30 篇,之後每天早上只做「產出」不做「想主題」。</p>
+
+<div class="prompt-block">用我上面的 Bible 設定,幫我排下個月 30 篇 FB / IG 貼文的主題與標題。
+
+規則：
+1. 每篇對應一個內容主題(3 個主題輪流用)
+2. 每篇標題要能勾住我的客群
+3. 週一 / 三 / 五各排 1 篇 = 每週 3 篇 × 4 週 + 補充
+4. 每篇要標註建議的貼文類型
+   (共鳴 / 觀點 / 提問 / 迷因 / 懺悔 / 教育)
+5. 用表格輸出： 日期 | 主題 | 標題 | 類型 | 平台</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：每月月底跑一次,產下個月的 30 篇。<strong>8:2 篩選</strong>：保留 6 篇強的、改 18 篇、刪 6 篇 — 不要全部照抄。
+</div>
+
+<h2><span class="step">STEP 3</span>每日新鮮素材注入</h2>
+<p class="prompt-hint">L2 的差異化關鍵。每天早上 3 分鐘記錄「今天的新素材」給 AI 消化,產出來的貼文就永遠不會撞。</p>
+
+<div class="prompt-block">今天(<span class="placeholder">[日期]</span>)的新鮮素材,幫我記住,等等產貼文時要用:
+
+【今天遇到的新案例】
+- <span class="placeholder">[具體對話 / 客戶背景 / 情境細節]</span>
+  (例:「昨晚客戶跟我說『我不怕現在窮,怕的是老了才發現算錯了』」)
+
+【今天的新體悟 / 看到的新內容】
+- <span class="placeholder">[讀到 / 看到 / 想到的東西]</span>
+  (例:「早上看報導,台灣 40+ 世代退休金缺口平均 500 萬」)
+
+【今天的心情 / 狀態】
+- <span class="placeholder">[自己當下的感受]</span>
+  (例:「昨晚陪媽媽看醫生累到爆,今天不想寫勵志文」)
+
+【今天特別不想寫的話題】
+- <span class="placeholder">[心情觸發的臨時禁區,可空]</span>
+  (例:「今天避開親情話題,自己還在情緒裡」)
+
+請把這些素材消化,等等我丟客戶情境給你時,
+從這些素材裡挑 1-2 個融入貼文。
+確認收到請回「今日素材已載入」。</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：每天早上第 1 步(產文前必跑),3 分鐘搞定。<strong>為什麼重要</strong>：Bible 是靜態的、不變的,同事抄得到;但今天的心情、新遇到的案例、新體悟 — 只有你有。這才是<strong>你的貼文永遠不會撞</strong>的關鍵。<br><br>
+  <strong>沒素材怎麼辦?</strong> 至少寫「今天的心情」一項 — 業務員每天心情都不一樣,這就是差異化。
+</div>
+
+<h2><span class="step">STEP 4</span>每日產文（含類型 + CTA + 個人指紋注入）</h2>
+<p class="prompt-hint">L2 的主角。這一段每天早上跑,AI 把「Bible + 今日素材 + 客戶情境」變成「貼文 + CTA」。</p>
+
+<div class="prompt-block">用我的 Bible + 剛才的今日素材,幫我針對這個客戶產一篇貼文 + CTA。
+
+【個人指紋注入 · 必要條件】
+每篇貼文必須:
+1. 引用我 Bible Part B「3 個轉捩點事件」的 1 個當開場或錨點
+2. 用我 Bible Part B「只有我會用的字詞」至少 2 個
+3. 開場場景從我 Bible Part B「Signature 開場」3 個之一切入
+4. 融入今天早上 Prompt 3 提供的「新鮮素材」1-2 個
+5. 遵守我 Bible Part B「絕對不寫清單」
+
+【客戶當下情境】
+- 基本： <span class="placeholder">[年齡、職業、家庭狀況]</span>
+- 他 / 她跟我說： <span class="placeholder">[原話]</span>
+- 我觀察到的情緒： <span class="placeholder">[疲憊、焦慮、迷茫……]</span>
+
+【類型選擇】
+從 6 大類型(共鳴 / 觀點 / 提問 / 迷因 / 懺悔 / 教育)中：
+1. 建議 2 個最適合這個情境 + 我原型的類型
+2. 每個類型各產一篇貼文
+3. 告訴我為什麼選這 2 個類型(原因 1 句話)
+
+【貼文要求】
+1. 先用冰山 5 層分析客戶真正在想什麼
+2. 挑 1 個情緒元素(愛 / 愧歉 / 安全感 / ……)
+3. 每篇 150-200 字
+4. 用我的口頭禪
+
+【CTA 要求】每個貼文版本後面各附 3 種 CTA：
+- CTA-A 留言互動型： 低摩擦,先開對話
+- CTA-B LINE 導流型： 中摩擦,加好友
+- CTA-C 私訊諮詢型： 高摩擦,直接來聊
+
+每個 CTA：
+- 符合我的原型 tone(不能業配感)
+- 不能踩招攬廣告 4 不
+- 3 句以內、不超過 40 字</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：Prompt 3 跑完後緊接跑 Prompt 4。<strong>金句</strong>：Bible 給貼文骨架,今日素材給貼文血肉。兩個都有,才是「你的貼文」。
+</div>
+
+<h2><span class="step">STEP 5</span>AI 反向自檢</h2>
+<p class="prompt-hint">PO 出去前的守門員。這一步最容易被跳過,但最重要。</p>
+
+<div class="prompt-block">用我的 Bible 設定,幫我檢查這篇貼文 + CTA：
+
+<span class="placeholder">[貼上剛才 Step 4 產的版本 + 選的 CTA]</span>
+
+檢查點：
+1. 有沒有踩到保險招攬廣告【四不】：
+   - 商品名稱及特色
+   - 足以辨識為某特定保險商品
+   - 變造資料
+   - 利用停售效應
+
+2. 有沒有踩到我原型的【三大 PO 文地雷】：
+   - 商品推銷(PO 商品)
+   - 財富炫耀(PO 財富)
+   - 負面情緒傳染(PO 負面情緒)
+
+3. 語氣有沒有偏離我的原型?
+   如果有,指出哪一句偏離、該怎麼改。
+
+4. 有沒有可以再放大【右腦感】的地方?
+   如果有,示範改寫 1 個段落。
+
+5. 【CTA 檢查】：
+   - CTA 跟貼文 tone 一致嗎?
+   - CTA 有沒有太業配感?
+   - 讀者看完想不想點?(勾住率 1-10 分)
+   - 如果分數 < 7,示範改寫版本
+
+6. 【類型一致性檢查】：
+   - 這篇的執行風格,跟我一開始選的類型匹配嗎?
+   - 如果偏離,指出哪一句偏離、該怎麼改回類型味道
+
+7. 【個人指紋檢查】：
+   - 有沒有用到我 Bible Part B 至少 1 個轉捩點事件?
+   - 有沒有用到我至少 2 個「只有我會用的字詞」?
+   - 有沒有從我 Signature 開場切入?
+   - 有沒有踩到我「絕對不寫清單」?</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：每篇 PO 出去前跑一次。<strong>金句</strong>：前面 Step 1-4 產出的是稻草,Step 5 是幫你把稻草煉成金。
+</div>
+
+<h2><span class="step">STEP 6</span>首次私訊 SOP</h2>
+<p class="prompt-hint">貼文 PO 出去後,有人留言、有人私訊、有人按讚 — 這一段教 AI 幫你寫回覆稿。</p>
+
+<div class="prompt-block">用我的 Bible 設定,幫我針對這 3 種情境各產一份首次私訊稿：
+
+情境 A： 讀者在我的貼文下留言「我也是這樣」
+情境 B： 讀者主動私訊我「我可以問你一件事嗎」
+情境 C： 讀者按讚但沒留言(我想主動私訊他)
+
+每份稿件要求：
+1. 破冰句 — 呼應讀者的動作或情緒
+   (不能一開頭就推銷)
+2. 提供價值 — 給一個具體的資訊 / 觀點 / 連結
+   (不是「我可以幫你」這種空話)
+3. 邀約加 LINE 好友 — 要有「正當理由」
+   (不能只說「加我 LINE」)
+
+規則：
+- 每份不超過 5 句
+- 用我的口頭禪
+- 不能踩招攬廣告 4 不</div>
+
+<div class="use-note">
+  <strong>使用時機</strong>：貼文 PO 出去 3-6 小時後,看留言 / 私訊 / 按讚有沒有動,跑一次拿現成回覆稿。<strong>加 LINE 3 個好理由</strong>：資料交付型「我有一份 XX 給你」/ 私下延續型「這個我私訊講比較清楚」/ 獨家資訊型「下週我有分享會,加 LINE 卡位」。
+</div>
+
+<div class="final">
+  <h3>建議使用順序</h3>
+  <ol>
+    <li><strong>今天</strong>： 跑 Prompt 1(Bible),存到你的 Claude / ChatGPT</li>
+    <li><strong>本週末</strong>： 跑 Prompt 2,排下週日曆</li>
+    <li><strong>每天早上 · 第 1 步（3 分鐘）</strong>： 跑 Prompt 3 記今日新鮮素材</li>
+    <li><strong>每天早上 · 第 2 步（15 分鐘）</strong>： 跑 Prompt 4 → Prompt 5 產出 + 自檢 → PO 出去</li>
+    <li><strong>PO 出去 3-6 小時後</strong>： 跑 Prompt 6,回覆讀者、導 LINE</li>
+    <li><strong>每月月底</strong>： 再跑 Prompt 2,排下個月</li>
+  </ol>
+</div>
+
+</section>
+
+<footer class="footer container" style="max-width:960px">
+  保險業務員品牌課 · Lesson 2 · 教材完整版<br>
+  幕創行銷股份有限公司 · 講師 魏上騰
+</footer>
+
+</main>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+
+  function activateTab(tabId) {
+    contents.forEach(el => el.classList.remove('active'));
+    buttons.forEach(el => el.classList.remove('active'));
+    const target = document.getElementById(tabId);
+    const btn = document.querySelector(`[data-tab="${tabId}"]`);
+    if (target) target.classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', '#' + tabId);
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
+
+  // Restore tab from URL hash on load
+  if (window.location.hash) {
+    const tab = window.location.hash.substring(1);
+    if (document.getElementById(tab)) activateTab(tab);
+  }
+</script>
+
+</body>
+</html>
