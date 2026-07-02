@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保險業務員品牌課 L1 · 回家作業（AI 協作練習）</title>
+<style>
+  :root{
+    --ink:#201f1d; --muted:#6e675f; --line:#ded7cf; --paper:#fbfaf7; --panel:#ffffff;
+    --soft:#f1ede7; --accent:#a5483d; --accent-2:#2f6f73; --accent-3:#8a6f28;
+    --good:#1f7a5a; --warn:#a35f16; --risk:#9b3030;
+    --sidebar:#27231f; --sidebar-ink:#e9e1d4; --sidebar-line:#3a342d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:#e9e4dc; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.72; font-size:16px;
+  }
+  a{color:inherit;}
+
+  .shell{display:grid; grid-template-columns:268px 1fr; min-height:100vh;}
+
+  aside{
+    position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+    background:var(--sidebar); color:var(--sidebar-ink); padding:22px 16px 40px;
+    border-right:1px solid var(--sidebar-line);
+  }
+  aside .brand{font-size:17px; font-weight:900; letter-spacing:.02em; line-height:1.35; margin:4px 4px 4px;}
+  aside .brand small{display:block; color:#b9ad99; font-size:12px; font-weight:700; margin-top:4px; letter-spacing:.06em;}
+  aside .updated{font-size:11.5px; color:#9c917f; margin:10px 4px 16px; padding-bottom:14px; border-bottom:1px solid var(--sidebar-line);}
+  aside nav a{
+    display:block; padding:7px 10px; margin:1px 0; border-radius:7px; text-decoration:none;
+    color:var(--sidebar-ink); font-size:13.5px; font-weight:700; transition:.12s;
+  }
+  aside nav a:hover{background:#34302a; color:#fff;}
+  aside nav a.active{background:var(--accent); color:#fff;}
+  aside nav a.sub{padding-left:24px; font-size:12.5px; font-weight:600; color:#c3b9a8;}
+  aside nav a.sub:hover{color:#fff;}
+  aside nav a.star::after{content:" ⭐"; font-size:11px;}
+  aside .search{width:100%; margin:0 0 12px; padding:8px 10px; border-radius:7px; border:1px solid var(--sidebar-line);
+    background:#1d1a16; color:#eee; font-size:13px;}
+  aside .search::placeholder{color:#8a8073;}
+  aside nav a.dim{display:none;}
+
+  main{max-width:1000px; padding:34px 40px 90px;}
+  .hero{background:var(--paper); border:1px solid var(--line); padding:30px 32px; box-shadow:0 12px 40px rgba(47,42,36,.08);}
+  .eyebrow{display:inline-flex; gap:8px; padding:5px 11px; background:#eee2dc; color:var(--accent); font-size:12.5px; font-weight:800; letter-spacing:.04em;}
+  h1{margin:14px 0 10px; font-size:clamp(26px,4vw,40px); line-height:1.1;}
+  .lead{color:#3d3934; font-size:16.5px; margin:0;}
+  .metawrap{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+  .tag{display:inline-flex; padding:5px 10px; background:var(--soft); border:1px solid var(--line); color:#514b45; font-size:12.5px; font-weight:700;}
+
+  section{scroll-margin-top:14px; margin-top:22px; background:var(--paper); border:1px solid var(--line); padding:26px 30px;}
+  h2{margin:0 0 14px; font-size:24px; line-height:1.2; border-bottom:2px solid var(--soft); padding-bottom:10px;}
+  h3{margin:20px 0 8px; font-size:17px; color:#352f29;}
+  h4{margin:14px 0 6px; font-size:14.5px; color:var(--accent-2); letter-spacing:.02em;}
+  p{margin:0 0 12px;}
+  ul,ol{margin:8px 0 12px; padding-left:22px;}
+  li{margin:5px 0;}
+  strong{color:#2c2722;}
+
+  blockquote{margin:0 0 14px; border-left:4px solid var(--accent-2); background:#edf4f3; padding:12px 16px; color:#324b48;}
+
+  table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); margin:12px 0; font-size:13.5px;}
+  th,td{padding:10px 11px; border-bottom:1px solid var(--line); vertical-align:top; text-align:left;}
+  th{background:#eee9e2; color:#463f38; font-size:12px; letter-spacing:.03em; text-transform:uppercase;}
+  tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even){background:#faf8f3;}
+  td.strike, tr.strike td{opacity:.5; text-decoration:line-through;}
+
+  .note{border-left:5px solid var(--accent-2); background:#edf4f3; padding:14px 16px; margin:14px 0;}
+  .warning{border-left:5px solid var(--warn); background:#fff4e7; padding:14px 16px; margin:14px 0;}
+  .risk{border-left:5px solid var(--risk); background:#fff0ef; padding:14px 16px; margin:14px 0;}
+  .ok{border-left:5px solid var(--good); background:#eef6ef; padding:14px 16px; margin:14px 0;}
+
+  .flow{background:#27231f; color:#fff8ee; padding:16px 18px; border-radius:8px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13.5px; line-height:1.9; white-space:pre; overflow-x:auto; margin:12px 0;}
+  .pill{display:inline-flex; padding:2px 8px; border:1px solid var(--line); background:#faf8f4; color:#5f574f; font-size:12px; font-weight:800; border-radius:3px;}
+  .pill.red{background:#fbeae8; border-color:#e8c4bf; color:#9b3030;}
+  .pill.green{background:#e9f4ed; border-color:#bfe0cc; color:#1f7a5a;}
+  .pill.gold{background:#faf0d6; border-color:#e5d5a3; color:#8a6f28;}
+  .pill.teal{background:#dfece9; border-color:#b8d4d0; color:#2f6f73;}
+  .small{color:var(--muted); font-size:13px;}
+
+  .overrides{border:1px dashed var(--accent); background:#fdf3f1; padding:14px 16px; margin:14px 0; border-radius:8px;}
+  .overrides b{color:var(--accent);}
+
+  .toplink{display:inline-block; margin-top:10px; font-size:12px; color:var(--muted); text-decoration:none;}
+  .toplink:hover{color:var(--accent);}
+
+  /* Prompt block (專門給可複製的 prompt 用) */
+  .prompt-block {
+    background:#27231f; color:#f3ead8; border-radius:8px;
+    padding:18px 20px; margin:12px 0; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:13px; line-height:1.75; white-space:pre-wrap; overflow-x:auto;
+    border-left:5px solid var(--accent);
+  }
+  .prompt-header {
+    display:flex; justify-content:space-between; align-items:center;
+    background:#1c1a16; color:#d6c9ad; padding:8px 14px; border-radius:6px 6px 0 0;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px;
+    margin:14px 0 0; border-left:5px solid var(--accent); font-weight:700; letter-spacing:.06em;
+  }
+  .prompt-block.attached { margin-top:0; border-radius:0 0 8px 8px; }
+  .copy-hint { color:#a09377; font-size:11px; }
+
+  /* Step header */
+  .step-tag {
+    display:inline-block; padding:4px 12px; background:var(--accent); color:#fff;
+    font-size:12px; font-weight:800; letter-spacing:.1em; border-radius:3px;
+    margin-bottom:8px;
+  }
+  .ai-role {
+    display:inline-block; padding:3px 10px; background:#dfece9; color:var(--accent-2);
+    font-size:12px; font-weight:700; border-radius:3px; margin-left:6px;
+  }
+
+  /* Demo box（示範區塊） */
+  .demo {
+    background:#fefaf2; border:1px solid #e5d5a3; padding:16px 18px; margin:14px 0; border-radius:6px;
+  }
+  .demo h4 { color:var(--accent-3); margin-top:0; }
+  .demo blockquote { background:#fff8e8; border-color:var(--accent-3); }
+
+  /* Mobile */
+  .menubtn{display:none;}
+  @media(max-width:880px){
+    .shell{grid-template-columns:1fr;}
+    aside{position:fixed; z-index:30; width:280px; left:-300px; transition:left .22s; box-shadow:6px 0 30px rgba(0,0,0,.3);}
+    aside.open{left:0;}
+    main{padding:20px 16px 70px;}
+    .menubtn{display:inline-flex; position:fixed; z-index:31; top:12px; right:12px; align-items:center; gap:6px;
+      background:var(--sidebar); color:#fff; border:none; padding:9px 14px; border-radius:8px; font-size:14px; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.25);}
+    .hero{padding:22px 18px;}
+    section{padding:20px 18px;}
+    table{display:block; overflow-x:auto;}
+    .backdrop{display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:29;}
+    .backdrop.show{display:block;}
+  }
+  @media print{
+    aside,.menubtn{display:none;} .shell{display:block;} main{max-width:none; padding:0;}
+    section,.hero{box-shadow:none; break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<button class="menubtn" onclick="toggleNav()">☰ 目錄</button>
+<div class="backdrop" onclick="toggleNav()"></div>
+<div class="shell">
+
+  <aside id="sidebar">
+    <div class="brand">保險業務員品牌課 · L1 回家作業<small>個人品牌建立 SOP</small></div>
+    <input class="search" id="navSearch" type="text" placeholder="搜尋章節…" oninput="filterNav(this.value)">
+    <nav id="nav">
+      <a href="#s0">0 · 30 秒看懂這份作業</a>
+      <a href="#s1">1 · 全程地圖（五步驟）</a>
+      <a href="#s2" class="star">2 · Step 1 · 我是誰</a>
+      <a href="#s2" class="sub">prompt 模板</a>
+      <!-- HIDDEN: 周哈里窗（這場短講不教）
+      <a href="#s2" class="sub">夥伴 cross-check</a>
+      -->
+
+      <a href="#s3" class="star">3 · Step 2 · 我要打誰</a>
+      <a href="#s3" class="sub">prompt 模板</a>
+      <a href="#s4" class="star">4 · Step 3 · 他要什麼</a>
+      <a href="#s4" class="sub">prompt 模板</a>
+      <a href="#s4" class="sub">挖渴望訣竅</a>
+      <a href="#s5" class="star">5 · Step 4 · 我講什麼</a>
+      <a href="#s5" class="sub">18 偏心渴望</a>
+      <a href="#s6" class="star">6 · Step 5 · 寫成貼文</a>
+      <a href="#s6" class="sub">prompt 模板</a>
+      <a href="#s6" class="sub">微調 3 件事</a>
+      <a href="#s7">7 · 完整示範案例</a>
+      <a href="#s7" class="sub">張業務員的全流程</a>
+      <a href="#s9">8 · 法規邊界</a>
+      <a href="#s10">9 · 進階練習</a>
+      <a href="#s11">10 · 卡關求救</a>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="hero" id="top">
+      <span class="eyebrow">LIVING DOCUMENT · L1 → L2 銜接素材</span>
+      <h1>L1 回家作業｜五步驟 AI 協作練習</h1>
+      <p class="lead">Lesson 1「我是誰」教的三個工具（保險業常見 6 大人格原型 / 冰山理論 / 18 偏心渴望），透過這份作業串成一個可重複的 SOP。跟著做完，你會產出第一篇有靈魂的個人品牌貼文。每個步驟都有獨立 prompt，你跟 AI 邊聊邊完成。</p>
+      <div class="metawrap">
+        <span class="tag">預估時間：40-60 分鐘</span>
+        <span class="tag">使用工具：ChatGPT 或 Claude</span>
+      </div>
+    </header>
+
+    <section id="s0">
+      <h2>0 · 30 秒看懂這份作業</h2>
+      <ul>
+        <li><strong>目標</strong>：把 L1 上的「自我覺察 + 客戶冰山 + 偏心渴望」串成「真的能發出去」的個人品牌貼文。</li>
+        <li><strong>方式</strong>：跟 AI（ChatGPT 或 Claude）對話，每個步驟都有可複製的 prompt 模板。你只要把 <code>[方括號]</code> 內容換成你的真實情況。</li>
+        <li><strong>產出</strong>：1 篇 Threads 貼文（150-200 字）+ Step 1-4 的填寫結果。</li>
+        <li><strong>暗藏好處</strong>：這套 SOP 你掌握後，未來每篇貼文都能 10 分鐘產出，不用再憑感覺寫。</li>
+      </ul>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s1">
+      <h2>1 · 全程地圖（五步驟）</h2>
+      <p>每個步驟對應一個 AI 角色，每個 AI 都有它的職責。你的工作是把每步驟的結果帶到下一步，最終整合成貼文。</p>
+
+      <div class="flow">Step 1 (15min)    Step 2 (5min)    Step 3 (10min)    Step 4 (5min)    Step 5 (15min)
+我是誰        →   我要打誰      →   他要什麼       →   我講什麼      →   寫成貼文
+[顧問]            [市場分析師]      [心理諮商師]       [文案策略師]       [文案寫手]</div>
+
+      <table>
+        <thead>
+          <tr><th>步驟</th><th>用到的工具</th><th>AI 角色</th><th>產出</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Step 1</strong>｜我是誰</td><td>6 大保險業人格原型</td><td><span class="pill teal">顧問</span></td><td>2-3 個原型</td></tr>
+          <tr><td><strong>Step 2</strong>｜我要打誰</td><td>原型 × 台灣客群對照</td><td><span class="pill teal">市場分析師</span></td><td>1 群最該開發的甜蜜點</td></tr>
+          <tr><td><strong>Step 3</strong>｜他要什麼</td><td>冰山理論（5 層）</td><td><span class="pill teal">心理諮商師</span></td><td>客戶 5 層冰山 + 最底層渴望</td></tr>
+          <tr><td><strong>Step 4</strong>｜我講什麼</td><td>18 偏心渴望</td><td><span class="pill teal">文案策略師</span></td><td>1-2 個情緒元素 + 力道評估</td></tr>
+          <tr><td><strong>Step 5</strong>｜寫成貼文</td><td>整合所有資訊</td><td><span class="pill teal">文案寫手</span></td><td>2 版本貼文（強/柔）</td></tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s2">
+      <span class="step-tag">STEP 1</span> <span class="ai-role">AI 角色：顧問</span>
+      <h2>2 · Step 1 · 我是誰</h2>
+      <p><strong>你要做的事</strong>：跟 AI 對話，找出你的 2-3 個品牌人格原型。</p>
+
+      <h3>2.1 複製這段 prompt 給 AI</h3>
+      <div class="prompt-header">
+        <span>📋 PROMPT · 自我人格原型分析</span>
+        <span class="copy-hint">複製整段 → 換 [方括號] → 貼給 ChatGPT / Claude</span>
+      </div>
+      <div class="prompt-block attached">我是保險業務員，從業 [X] 年。
+
+我平常跟客戶溝通的風格是：
+[簡述自己怎麼跟客戶說話。例：偏理性、會講數據、會關心對方的家人狀況、講故事派...]
+
+我最擅長的產品類型是：[例：醫療險、儲蓄險、投資型、團體險、傳承規劃...]
+
+我覺得我跟其他業務員不一樣的地方是：
+[簡述差異點。例：會主動關心客戶家人、會準備 Excel 試算、用故事不用數據、口才不好但很用心...]
+
+我目前的客戶主要組成是：
+[例：上班族、媽媽圈、企業老闆、年輕人、四師...]
+
+請從以下 6 種保險業常見品牌人格原型中，幫我分析我可能屬於哪 2-3 個：
+
+05 知識｜專業、權威、佔據知識落差｜顧問型、法稅專家
+06 權力｜控制、強勢、給予絕對選項｜決策者圈、高資產老闆客
+08 信念｜決心、號召力、鐵粉｜團隊增員、講師線
+13 玩樂｜幽默、玩性、人生苦短｜年輕客群、IG/Threads/短影音業務
+14 關懷｜溫暖、同理、給予奉獻｜家庭客戶、媽媽圈、長照產品
+15 務實｜CP 值、數據、精打細算｜精算型客戶、理財顧問
+
+請依以下格式回應：
+1. 我最像的 2-3 個原型（從強到弱排序）
+2. 每個原型的判斷理由（結合我給你的資訊）
+3. 這些原型適合對外輸出時的內容方向
+4. 如果我要刻意展現「次要原型」，可以從哪些內容切入</div>
+
+      <!-- HIDDEN: 周哈里窗段落（這場短講不教，未來正式版補完時打開）
+      <h3>2.2 跑完 AI 後還要做的事（這部分 AI 做不到）</h3>
+      <ol>
+        <li><strong>找一位夥伴</strong>（課堂配對的人 / 業務員朋友 / 老婆/老公），請他/她用同樣的 prompt 幫你跑一次（把「我」改成「他/她」）</li>
+        <li><strong>比對兩次結果</strong>：</li>
+      </ol>
+      <table>
+        <thead><tr><th>象限</th><th>判斷規則</th><th>對你的意義</th></tr></thead>
+        <tbody>
+          <tr><td><strong>公眾我</strong></td><td>你選的 ∩ 夥伴也選的</td><td>⭐ 品牌主軸：對外輸出最有說服力</td></tr>
+          <tr><td><strong>盲目我</strong></td><td>夥伴選但你沒選</td><td>被低估的金礦：可能切入新客層</td></tr>
+          <tr><td><strong>認知我</strong></td><td>你選但夥伴沒看到</td><td>成長方向：社群上要刻意展現</td></tr>
+          <tr><td><strong>潛在我</strong></td><td>都沒選到的</td><td>留給時間發掘</td></tr>
+        </tbody>
+      </table>
+      -->
+
+      <div class="note"><strong>📌 Step 1 寫下你的結論：</strong><br>
+      「我要對外輸出的品牌定位是：<u>______（原型 A，主軸）</u> + <u>______（原型 B，輔助補充方向）</u>」</div>
+
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s3">
+      <span class="step-tag">STEP 2</span> <span class="ai-role">AI 角色：市場分析師</span>
+      <h2>3 · Step 2 · 我要打誰</h2>
+      <p><strong>你要做的事</strong>：跟 AI 確認你的品牌定位對應什麼客群，挑出最該開發的那群。</p>
+
+      <h3>3.1 複製這段 prompt 給 AI</h3>
+      <div class="prompt-header">
+        <span>📋 PROMPT · 目標客群分析（台灣本土）</span>
+        <span class="copy-hint">已要求 AI 用台灣語境，不會給你 LinkedIn / Strava 這種不適用的</span>
+      </div>
+      <div class="prompt-block attached">我是台灣的保險業務員。
+我的品牌定位是「[Step 1 結論的原型，例：知識 + 關懷]」。
+
+請幫我做以下分析：
+
+1. 在台灣保險市場上，
+   這些原型最容易打動的 3-5 群客戶是誰？
+   每群客戶請描述：
+   - 年齡、性別範圍
+   - 職業
+   - 家庭狀態
+   - 主要痛點
+   - 常出沒的社群平台 / 實體場域
+
+2. 從這幾群裡，
+   哪一群是「2026 年台灣保險業務員最值得開發 + 最少人經營」的甜蜜點？
+   為什麼？
+
+3. 對這群人，我應該優先做哪 3 種主題的貼文？
+   給我可以直接執行的內容方向（不要空話）。
+
+4. 提醒：請用台灣本土語境（不要說 LinkedIn、Strava 這種不適用的）。
+   平台舉例請用：FB、IG、Threads、LINE、Dcard、PTT、Mobile01、媽咪愛 等台灣實際用的。</div>
+
+      <h3>3.2 跑完 AI 後還要做的事</h3>
+      <p>從 AI 給的 3-5 群裡，<strong>圈出 1 群你最想開發的</strong>（不要全做，會散）。</p>
+
+      <div class="note"><strong>📌 Step 2 寫下你的結論：</strong><br>
+      「我要服務的客戶輪廓是：<u>______（年齡 / 職業 / 家庭狀況 / 主要痛點）</u>」</div>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s4">
+      <span class="step-tag">STEP 3</span> <span class="ai-role">AI 角色：心理諮商師</span>
+      <h2>4 · Step 3 · 他要什麼</h2>
+      <p><strong>你要做的事</strong>：挑一位<strong>真實認識的客戶</strong>（屬於 Step 2 那個客群），跟 AI 一起挖出他/她的深層渴望。</p>
+
+      <div class="warning"><strong>⚠️ 重要</strong>：用真實的人練習，不要虛構。AI 拿到真實資料才能挖出真正打到人的渴望，虛構案例會產出泛泛之談。</div>
+
+      <h3>4.1 複製這段 prompt 給 AI</h3>
+      <div class="prompt-header">
+        <span>📋 PROMPT · 客戶冰山理論深度分析</span>
+        <span class="copy-hint">描述要具體，越具體 AI 挖得越深</span>
+      </div>
+      <div class="prompt-block attached">我想用「冰山理論」深度分析一位真實認識的客戶。
+請幫我挖出他/她可能的真實渴望。
+
+【客戶基本資料】
+- 性別：[男 / 女]
+- 年齡：[XX 歲]
+- 職業：[例：護理師、工程師、家庭主婦...]
+- 家庭狀況：[例：已婚、有 2 個小孩、單身、剛離婚...]
+- 我跟他/她認識多久：[X 年]
+
+【他/她最近跟我說過的話 或 做過讓我印象深刻的事】
+[例：「保費好貴，但又不敢不買」、最近在抱怨工作壓力大、上次拿到加薪沒慶祝...
+盡量寫具體的句子或場景，不要寫「很焦慮」這種抽象詞]
+
+【我觀察到他/她的情緒】
+[例：累、焦慮、迷茫、開心但有保留、開心但壓抑...]
+
+請用冰山理論的 5 層幫我分析他/她：
+
+第 1 層 · 行為：他/她做了什麼、說了什麼
+第 2 層 · 感受：背後的情緒
+第 3 層 · 觀點：他/她對這件事的信念是什麼
+第 4 層 · 期待：他/她想要的具體結果
+第 5 層 · 渴望 ⭐：他/她最深層真正想要的是什麼
+
+特別重要：
+- 第 5 層「渴望」請寫得越具體越好
+- 不要寫「想要安全感」這種空話
+- 要寫「想要被某個人看見」「想要證明自己不輸給誰」這種有畫面的句子
+
+最後請告訴我：
+這個渴望，跟我要服務的客群（[Step 2 客群輪廓]）的普遍渴望有沒有 fit？
+如果有 fit，我可以從這個渴望延伸到多少類似客戶身上？</div>
+
+      <h3>4.2 跑完 AI 後還要做的事</h3>
+      <p>看 AI 寫的「第 5 層渴望」夠不夠戳。如果還是太空，<strong>追問 AI</strong>：</p>
+      <blockquote>「再往下挖一層。你寫的這個渴望背後，還有更深的什麼？」</blockquote>
+      <p class="small">通常追問 2-3 次才會挖到真正核心。</p>
+
+      <div class="ok"><strong>🎯 挖渴望的訣竅</strong>：問自己 3 次「然後呢？他/她為什麼想要這個？」<br>
+      例：她不敢不買保險 → 然後呢？→ 她怕自己倒下家人就完了 → 然後呢？→ 她從來沒有人在背後撐她 → 然後呢？→ ✅「她希望有人能照顧她」（這才是渴望）</div>
+
+      <div class="note"><strong>📌 Step 3 寫下你的結論：</strong><br>
+      「這位客戶最深的渴望是：<u>______（具體一句話，有畫面）</u>」</div>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s5">
+      <span class="step-tag">STEP 4</span> <span class="ai-role">AI 角色：文案策略師</span>
+      <h2>5 · Step 4 · 我講什麼</h2>
+      <p><strong>你要做的事</strong>：從 18 個偏心渴望挑 1-2 個，跟 AI 確認怎麼使用最有效。</p>
+
+      <h3>5.1 18 個常用偏心渴望（觸碰客戶深層情緒）</h3>
+      <table>
+        <thead><tr><th>情緒</th><th>使用力道</th><th>建議頻率</th><th>適合搭配的渴望</th></tr></thead>
+        <tbody>
+          <tr><td>責任感</td><td><span class="pill">中強</span></td><td>每週 1-2 次</td><td>對家人的承諾</td></tr>
+          <tr><td>愧歉</td><td><span class="pill red">猛藥</span></td><td>每月封頂 1 次</td><td>對自己/家人的虧欠</td></tr>
+          <tr><td>自由</td><td><span class="pill">中</span></td><td>每 1-2 週 1 次</td><td>不為錢工作</td></tr>
+          <tr><td>害怕</td><td><span class="pill red">猛藥</span></td><td>慎用</td><td>未知風險、失能</td></tr>
+          <tr><td>比較</td><td><span class="pill red">猛藥</span></td><td>慎用</td><td>同儕焦慮</td></tr>
+          <tr><td>虛榮</td><td><span class="pill red">猛藥</span></td><td>慎用</td><td>身份感</td></tr>
+          <tr><td>安全感</td><td><span class="pill green">穩定</span></td><td>每週可用</td><td>對未來的掌控</td></tr>
+          <tr><td>愛</td><td><span class="pill green">穩定</span></td><td>每週可用</td><td>對家人的情感</td></tr>
+          <tr><td>勇氣</td><td><span class="pill">中</span></td><td>每 2 週 1 次</td><td>面對改變</td></tr>
+          <tr><td>好奇</td><td><span class="pill gold">輕鉤</span></td><td>每週可用</td><td>知識型內容開頭</td></tr>
+          <tr><td>幸福感</td><td><span class="pill gold">輕</span></td><td>每週可用</td><td>家庭場景</td></tr>
+          <tr><td>美妙</td><td><span class="pill gold">輕</span></td><td>每月 1-2 次</td><td>退休生活想像</td></tr>
+          <tr><td>困難 / 懶惰</td><td><span class="pill">中</span></td><td>每月 1-2 次</td><td>痛點開頭</td></tr>
+          <tr><td>愉悅</td><td><span class="pill gold">輕</span></td><td>不限</td><td>玩樂型業務員</td></tr>
+          <tr><td>空洞</td><td><span class="pill">中</span></td><td>每月 1 次</td><td>人生轉折期</td></tr>
+          <tr><td>冒險</td><td><span class="pill">中</span></td><td>每月 1-2 次</td><td>創業 / 海外移居</td></tr>
+          <tr><td>貪</td><td><span class="pill red">猛藥</span></td><td>慎用</td><td>投資型</td></tr>
+        </tbody>
+      </table>
+
+      <h3>5.2 複製這段 prompt 給 AI</h3>
+      <div class="prompt-header">
+        <span>📋 PROMPT · 情緒元素選擇</span>
+        <span class="copy-hint">把 Step 3 找到的渴望貼進來</span>
+      </div>
+      <div class="prompt-block attached">我想針對一位客戶寫一篇社群貼文。
+
+【客戶的最深渴望】
+[Step 3 找到的渴望，例：「我想被照顧一次，可是好像沒人會照顧我」]
+
+【我要打動的客群】
+[Step 2 的客群輪廓，例：30-40 歲護理師媽媽]
+
+從以下 18 個常用「偏心渴望」情緒元素中：
+
+困難、好奇、害怕、責任感、愉悅、愧歉、懶惰、比較、
+虛榮、空洞、安全感、冒險、愛、貪、自由、幸福感、美妙、勇氣
+
+請幫我分析：
+
+1. 哪 1-2 個情緒元素，最能戳到這位客戶的渴望？
+2. 每個元素的「使用力道」（弱 / 中 / 強 / 危險）
+3. 用了這個元素，讀者看完應該心裡產生什麼樣的感受/獨白？
+   （例：「我也要對自己好一點」「我老婆要的我怎麼可以擋下來」）
+4. 警告：如果用太重，可能引起什麼負面反應？
+5. 這個元素適合「每週用」「每月用」還是「半年用一次」？</div>
+
+      <h3>5.3 跑完 AI 後還要做的事</h3>
+      <p>從 AI 推薦的元素，<strong>挑你直覺最 buy 的那一個</strong>（不要選 AI 說的最強的，選你自己最有感的，這樣寫起來才像你）。</p>
+
+      <div class="note"><strong>📌 Step 4 寫下你的結論：</strong><br>
+      「我要用『<u>______（情緒元素）</u>』讓讀者看完心裡覺得『<u>______（預期感受）</u>』」</div>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s6">
+      <span class="step-tag">STEP 5</span> <span class="ai-role">AI 角色：文案寫手</span>
+      <h2>6 · Step 5 · 寫成貼文</h2>
+      <p><strong>你要做的事</strong>：把前面 4 步驟全部整合，跟 AI 一起產出貼文。</p>
+
+      <h3>6.1 複製這段 prompt 給 AI（整合版）</h3>
+      <div class="prompt-header">
+        <span>📋 PROMPT · 整合產出貼文</span>
+        <span class="copy-hint">把 Step 1-4 結果全部填進來</span>
+      </div>
+      <div class="prompt-block attached">請幫我寫一篇 Threads 貼文（150-200 字）。
+
+【整合背景】
+我的品牌定位：[Step 1 原型]
+目標客群：[Step 2 客群輪廓]
+
+我想觸動的客戶冰山：
+- 行為：[Step 3 行為]
+- 感受：[Step 3 感受]
+- 觀點：[Step 3 觀點]
+- 期待：[Step 3 期待]
+- 渴望：[Step 3 渴望]
+
+要用的情緒元素：[Step 4 元素]
+讀者看完應該感受到：[Step 4 預期感受]
+
+【寫作規則】
+1. 用「具體場景」開頭（一個畫面、一個對話），不要用「親愛的朋友」這種陳腔濫調
+2. 中段要有 2-3 句 quote（對話感）
+3. 結尾不要 CTA「快聯繫我」，丟一個價值觀讓人想轉發
+4. 不能提任何保險商品名稱、特色、停售（保險業招攬廣告法律規範）
+5. 全篇要符合我「[Step 1 原型]」的人格風格
+   （例：知識型要有專業洞見、關懷型要有溫度、玩樂型要有梗、務實型要有數據）
+
+請給我 2 個版本：
+版本 A — 力道較強（情緒推到極致）
+版本 B — 力道較柔（情緒含蓄，留給讀者腦補）
+
+最後告訴我：
+- 這 2 個版本在「轉發率」與「客戶留言率」上的預估差異
+- 哪個版本比較適合台灣保險業務員的 Threads 環境</div>
+
+      <h3>6.2 跑完 AI 後務必做的 3 件事</h3>
+      <table>
+        <thead><tr><th>#</th><th>做什麼</th><th>為什麼</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>改成你的真實案例</strong></td><td>AI 寫的是虛構場景，你改成你認識的某個人（細節模糊不點名）</td></tr>
+          <tr><td>2</td><td><strong>加你自己的口頭禪</strong></td><td>AI 寫不出你的味道。把你平常會說的「老實講」「我跟你說」「真的」加回去</td></tr>
+          <tr><td>3</td><td><strong>改 hashtag</strong></td><td>AI 給的 tag 太通用，改成你常用的個人 tag</td></tr>
+        </tbody>
+      </table>
+
+      <div class="risk"><strong>🚨 發文前自查 4 不 PO</strong><br>
+      不能 PO ① 商品名稱及特色 ② 足以辨識為某特定保險商品 ③ 變造資料 ④ 利用停售效應<br>
+      法源：保險業招攬廣告法律規範</div>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s7">
+      <h2>7 · 完整示範案例（張業務員的全流程）</h2>
+      <p>下面是一個從 Step 1 走到 Step 5 完整的範例，看完就知道自己怎麼填。<strong>示範人物：張業務員（虛構），從業 8 年，主做家庭客戶。</strong></p>
+
+      <!-- HIDDEN: 完整版含周哈里窗（這場短講不教，未來補完時打開、刪掉精簡版）
+      <div class="demo">
+        <h4>Step 1 · 張業務員的人格原型</h4>
+        <ul>
+          <li><strong>自己選</strong>：知識（喜歡查資料）+ 關懷（顧客戶感受）</li>
+          <li><strong>夥伴選</strong>：知識 + 平凡（夥伴覺得他像鄰家大哥）</li>
+          <li><strong>周哈里窗</strong>：
+            <ul>
+              <li>公眾我 = 知識 ⭐</li>
+              <li>盲目我 = 平凡（沒意識到自己很接地氣）</li>
+              <li>認知我 = 關懷（內心很關心人但沒展現）</li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>📌 結論：品牌定位 = <strong>知識（主軸）+ 關懷（社群刻意展現）</strong></blockquote>
+      </div>
+      -->
+      <div class="demo">
+        <h4>Step 1 · 張業務員的人格原型</h4>
+        <ul>
+          <li><strong>選出的原型</strong>：知識（喜歡查資料）+ 關懷（顧客戶感受）</li>
+        </ul>
+        <blockquote>📌 結論：品牌定位 = <strong>知識（主軸）+ 關懷（輔助補充方向）</strong></blockquote>
+      </div>
+
+      <div class="demo">
+        <h4>Step 2 · 張業務員的目標客群</h4>
+        <ul>
+          <li>知識原型對應 → 四師、教學醫院醫師、教授</li>
+          <li>關懷原型對應 → 已婚有孩女性、新手媽媽、護理師、國小老師</li>
+          <li>兩原型甜蜜點 = <strong>護理師</strong>（有專業背景 + 在照顧人）</li>
+        </ul>
+        <blockquote>📌 結論：目標客群 = <strong>30-40 歲已婚有 1-2 個小孩的護理師。輪班生活、需要照顧家人但常常忽略自己。</strong></blockquote>
+      </div>
+
+      <div class="demo">
+        <h4>Step 3 · 張業務員的客戶冰山（表妹小芸）</h4>
+        <p><strong>真實客戶</strong>：表妹小芸，35 歲，台北某醫學中心夜班護理師，兩個小孩（5 歲 + 2 歲）。</p>
+        <table>
+          <thead><tr><th>層次</th><th>內容</th></tr></thead>
+          <tbody>
+            <tr><td>行為</td><td>跟我抱怨「保費好貴，但又不敢不買」</td></tr>
+            <tr><td>感受</td><td>累、焦慮、不想多想</td></tr>
+            <tr><td>觀點</td><td>「我這麼累就是為了家人」「我不能倒下」</td></tr>
+            <tr><td>期待</td><td>「希望孩子未來不要過得太辛苦」</td></tr>
+            <tr><td><strong>渴望 ⭐</strong></td><td><strong>「我想被照顧一次，可是好像沒人會照顧我」</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="demo">
+        <h4>Step 4 · 張業務員選的情緒元素</h4>
+        <ul>
+          <li>對應「想被照顧」的渴望 → 挑 <strong>愧歉（對自己的虧欠）</strong> + <strong>愛（自我關懷）</strong></li>
+          <li>力道：愧歉是猛藥，每月 1 次封頂</li>
+          <li>讀者預期感受：<strong>「我也要對自己好一點」</strong></li>
+        </ul>
+      </div>
+
+      <div class="demo">
+        <h4>Step 5 · 張業務員最終貼文（AI 跑完 + 自己微調）</h4>
+        <blockquote>我表妹是急診室護理師。<br>
+5 歲跟 2 歲兩個孩子。<br><br>
+上週她跟我說：<br>
+「我半夜下班回家，<br>
+看到老公跟小孩睡得好沉，<br>
+我居然羨慕他們。」<br><br>
+「他們有人照顧。」<br>
+「我呢？」<br><br>
+——<br><br>
+我做這行 8 年，<br>
+看過太多女性把保費省下來「給家人買」，<br>
+自己反而是最後一個有保障的人。<br><br>
+但我想跟所有正在輪班、正在硬撐的妳說：<br><br>
+「妳願意為家人撐住，<br>
+是因為妳很愛他們。<br>
+但下一個被妳愛的人，<br>
+該是妳自己。」<br><br>
+#護理師日常 #對自己好一點</blockquote>
+      </div>
+
+      <h3>7.1 從這個示範你能抽出的「套路」</h3>
+      <ol>
+        <li>不從產品切入，從<strong>一個具體場景</strong>進場</li>
+        <li>中段用 <strong>2-4 個 quote</strong> 製造對話感</li>
+        <li>中段把「淺層需求」<strong>重新定義成深層渴望</strong></li>
+        <li>結尾不 CTA，<strong>丟一個價值觀</strong>讓人轉發</li>
+      </ol>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s9">
+      <h2>8 · 法規邊界（保險業招攬廣告）</h2>
+      <p>寫保險「觀念」OK、寫「故事」OK，但不能變成商品推銷。發文前每次都要 self-check 這 8 點。</p>
+
+      <h3>9.1 ❌ 不能 PO 的 4 件事</h3>
+      <ul>
+        <li><strong>商品名稱及特色</strong>（例：「XX 公司新醫療險，每月只要 OO 元保 OOO 萬」）</li>
+        <li><strong>足以辨識為某特定保險商品</strong>（例：「最新發行的儲蓄險，6 年到期 IRR 3.5%」）</li>
+        <li><strong>變造資料</strong>（例：把不是公司公告的數字當公司公告）</li>
+        <li><strong>利用停售效應</strong>（例：「下月停售，快來搶最後一張！」）</li>
+      </ul>
+
+      <h3>9.2 ✅ 可以 PO 的 4 件事</h3>
+      <ul>
+        <li><strong>保險觀念</strong>（例：「為什麼失能風險比死亡風險高 4 倍」）</li>
+        <li><strong>客戶故事</strong>（細節要模糊、不點名、改造保護當事人）</li>
+        <li><strong>業務員反思</strong>（例：「做這行 12 年最常聽到的話是...」）</li>
+        <li><strong>合法數據</strong>（衛福部、勞動部、保發中心公開資料）</li>
+      </ul>
+
+      <div class="risk"><strong>🚨 紅線</strong>：不確定的時候，把貼文丟給 AI 問「這篇有沒有踩到保險業招攬廣告法律紅線」。AI 不是法律意見，但能幫你抓 90% 明顯違規。</div>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s10">
+      <h2>9 · 進階練習（跑完一輪後可以做的）</h2>
+
+      <h3>10.1 A 量產練習</h3>
+      <p>用同樣 5 步驟，但 Step 3 換不同客戶。<strong>每個原型各跑 2-3 篇</strong>，你會有：</p>
+      <ul>
+        <li>12-18 篇不同角度的素材庫（6 原型 × 2-3 篇）</li>
+        <li>可以排成 1 個月的內容行事曆</li>
+      </ul>
+
+      <h3>10.2 B 反向驗證</h3>
+      <p>寫完貼文後，再丟一個<strong>新對話</strong>給 AI：</p>
+      <div class="prompt-block">我寫了這篇貼文（貼上你的貼文）。
+請幫我分析：
+1. 這篇貼文最可能打動哪種人格類型的讀者？
+2. 哪個客群最可能轉發？
+3. 哪 3 句話最有殺傷力？
+4. 有沒有踩到保險業招攬廣告法律紅線？</div>
+      <p>用 AI 反向驗證你的貼文有沒有打到對的人。</p>
+
+      <h3>10.3 C 風格穩定性練習</h3>
+      <p>同一個客戶冰山（Step 3）+ 同一個渴望（Step 4），但換不同情緒元素（責任感 / 愧歉 / 自由 / 安全感），看 AI 寫出來的貼文力道差異。</p>
+      <p class="small">這個練習幫你建立「在什麼情緒元素下我最舒服 / 最有殺傷力」的個人風格地圖。</p>
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+    <section id="s11">
+      <h2>10 · 卡關求救</h2>
+      <table>
+        <thead><tr><th>卡關情境</th><th>解法</th></tr></thead>
+        <tbody>
+          <tr><td>Step 1 — AI 給的原型不像我</td><td>提供更具體的工作場景（例：「上次跟客戶聊天他說...」），不要只給形容詞</td></tr>
+          <tr><td>Step 2 — AI 給的客群太籠統</td><td>追問：「以上 5 群裡，第 2 群再給我更細的子分群」</td></tr>
+          <tr><td>Step 3 — 渴望挖不到第 5 層</td><td>追問：「再往下挖一層。你寫的這個渴望背後，還有更深的什麼？」最多追問 3 次</td></tr>
+          <tr><td>Step 4 — 不知道挑哪個情緒</td><td>同時試 2 個（一個猛藥 + 一個穩定），到 Step 5 看哪個版本你比較喜歡</td></tr>
+          <tr><td>Step 5 — AI 寫出來不像我</td><td>把你之前寫過的貼文（任何）貼給 AI 當「風格參考」，要它模仿你的句子節奏</td></tr>
+          <tr><td>整體卡住</td><td>把卡關的那一步截圖記下來，課堂或私訊時跟老師討論</td></tr>
+        </tbody>
+      </table>
+
+      <h3>10.1 課程文件位置</h3>
+      <ul>
+        <li>本份作業：<code>保險業務員品牌課_L1作業_WIKI.html</code></li>
+        <li>L1 投影片：課堂另行提供</li>
+        <li>6 大原型客群對照表：見本檔 §5 / 課堂講義（正式版補完 15 原型後此處同步更新）</li>
+      </ul>
+
+      <a class="toplink" href="#top">↑ 回頂端</a>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function toggleNav(){
+    document.getElementById('sidebar').classList.toggle('open');
+    document.querySelector('.backdrop').classList.toggle('show');
+  }
+  document.querySelectorAll('#nav a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.innerWidth<=880){ toggleNav(); }
+    });
+  });
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('#nav a:not(.sub)'));
+  function onScroll(){
+    var pos = window.scrollY + 120;
+    var current = sections[0];
+    sections.forEach(function(s){ if(s.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current.id);
+    });
+  }
+  window.addEventListener('scroll', onScroll); onScroll();
+  function filterNav(q){
+    q = q.trim().toLowerCase();
+    document.querySelectorAll('#nav a').forEach(function(a){
+      var hit = a.textContent.toLowerCase().indexOf(q) !== -1;
+      a.classList.toggle('dim', q!=='' && !hit);
+    });
+  }
+</script>
+</body>
+</html>
